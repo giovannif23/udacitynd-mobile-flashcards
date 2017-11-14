@@ -1,0 +1,5 @@
+export const primary = '#468189'
+export const white = '#fafafa'
+export const black = '#031926'
+export const grey = '#e3f2fd'
+export const red = '#db5461'
