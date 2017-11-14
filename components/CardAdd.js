@@ -3,21 +3,22 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native';
 import * as color from '../utils/colors'
 
-export default class DeckAdd extends Component {
+export default class CardAdd extends Component {
   render() {
     return (
       <Container>
-        <Text>What is the name of your new deck?</Text>
+        <Text>Add Card</Text>
 
-        <Text>Deck Title Field</Text>
-
+        <Text>Question Field</Text>
+        <Text>Answer Field</Text>
+        
         <SubmitButton>
           <SubmitButtonText>SUBMIT</SubmitButtonText>
         </SubmitButton>
       </Container>
     )
   }
-};
+};    
 
 const Container = styled.View`
   background-color: ${color.white};

@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, StatusBar, Platform, TouchableOpacity } from 'r
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import Decks from './components/Decks'
 import Deck from './components/Deck'
+import DeckAdd from './components/DeckAdd'
+import CardAdd from './components/CardAdd'
+import Quiz from './components/Quiz'
 import { primary, white, black, grey } from './utils/colors'
 import { FontAwesome, Ionicons, Feather } from '@expo/vector-icons'
 import { Constants } from 'expo'
@@ -20,7 +23,14 @@ const Tabs = TabNavigator({
     screen: Decks,
     navigationOptions: {
       tabBarLabel: 'Decks',
-      tabBarIcon: ({ tintColor }) => <Feather name='list' size={30} color={tintColor} />
+      tabBarIcon: ({ tintColor }) => <Feather name='layers' size={20} color={tintColor} />
+    },
+  },
+  NewDeck: {
+    screen: DeckAdd,
+    navigationOptions: {
+      tabBarLabel: 'Add',
+      tabBarIcon: ({ tintColor }) => <Feather name='plus-square' size={20} color={tintColor} />
     },
   },
 }, {
@@ -30,7 +40,6 @@ const Tabs = TabNavigator({
   tabBarOptions: {
     activeTintColor: white,
     style: {
-      height: 56,
       backgroundColor: primary,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
@@ -49,7 +58,13 @@ const MainNavigator = StackNavigator({
   },
   Deck: {
     screen: Deck,
-  }
+  },
+  AddCard: {
+    screen: CardAdd,
+  },
+  Quiz: {
+    screen: Quiz,
+  },
 })
 
 export default class App extends React.Component {
