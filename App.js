@@ -1,31 +1,26 @@
 import React from 'react';
 import { View, Text, StyleSheet, StatusBar, Platform, TouchableOpacity } from 'react-native'
 import { TabNavigator } from 'react-navigation'
-import { primary, white, black } from './utils/colors'
+import Decks from './components/Decks'
+import Deck from './components/Deck'
+import { primary, white, black, grey } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { Constants } from 'expo'
 
-function Home () {
+function StatusBarWrap ({ backgroundColor, ...props }) {
   return (
-    <View>
-      <Text style={styles.text}>HOME!</Text>
-    </View>
-  )
-}
-
-function Contact () {
-  return (
-    <View>
-      <Text style={styles.text}>Contact!</Text>
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
     </View>
   )
 }
 
 const Tabs = TabNavigator({
-  Home: {
-    screen: Home,
+  Decks: {
+    screen: Decks,
   },
-  Contact: {
-    screen: Contact
+  Deck: {
+    screen: Deck,
   },
 });
 
@@ -33,6 +28,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBarWrap />
         <Tabs />
       </View>
     );
@@ -42,12 +38,10 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: black,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: white
   },
   text: {
-    color: white,
+    color: grey,
     fontSize: 40
   }
 });
