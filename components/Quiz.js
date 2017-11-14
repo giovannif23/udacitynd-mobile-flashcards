@@ -5,4 +5,4 @@ export default Quiz = () => (
   <View>
     <Text>Quiz View</Text>
   </View>
-);
+);    
