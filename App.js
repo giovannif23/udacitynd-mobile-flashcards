@@ -7,7 +7,7 @@ import DeckAdd from './components/DeckAdd'
 import CardAdd from './components/CardAdd'
 import Quiz from './components/Quiz'
 import { primary, white, black, grey } from './utils/colors'
-import { FontAwesome, Ionicons, Feather } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
 import { Constants } from 'expo'
 
 function StatusBarWrap ({ backgroundColor, ...props }) {

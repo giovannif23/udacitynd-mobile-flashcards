@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Feather } from '@expo/vector-icons'
 import styled from 'styled-components/native';
 import * as color from '../utils/colors'
 
@@ -15,8 +16,8 @@ export default class Quiz extends Component {
           </ShowAnswer>
 
           <Selection>
-            <FalseButton><FalseButtonText>FALSE</FalseButtonText></FalseButton>
-            <TrueButton><TrueButtonText>TRUE</TrueButtonText></TrueButton>
+            <FalseButton><FalseButtonText> <Feather name='thumbs-down' size={20} /></FalseButtonText></FalseButton>
+            <TrueButton><TrueButtonText><Feather name='thumbs-up' size={20} /></TrueButtonText></TrueButton>
           </Selection>
         </CardQuestion>
       </Container>
