@@ -14,7 +14,6 @@ export function getDecks() {
 }
 
 export function getDeck(id) {
-  console.log('API', id)
   return AsyncStorage.getItem(id)
     .then(result => JSON.parse(result))
 }
@@ -24,18 +23,23 @@ export function addDeck(name) {
     cards: [],
     created_at: Date.now(),
     name,
+    updated_at: Date.now(),
   }
   return AsyncStorage.setItem(shortid.generate(), JSON.stringify(deckObj))
     .then(result => result)
 }
 
+export function addCardToDeck(id, { answer, question}) {
+  const questionObj = {
+    answer,
+    question,
+  }
 
-// export function saveDeckTitle(title) {
-//   return AsyncStorage.setItem(DECKS)
-//     .then((results) => console.log(results))
-// }
-
-// export function addCardToDeck({ title, card}) {
-//   return AsyncStorage.setItem(DECKS)
-//     .then((results) => console.log(results))
-// }
+  getDeck(id)
+    .then((result) => {
+      result.updated_at = Date.now()
+      result.cards.push(questionObj);
+      return AsyncStorage.mergeItem(id, JSON.stringify(result))
+        .then(result => result)
+    })
+}

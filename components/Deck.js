@@ -28,10 +28,10 @@ export default class Deck extends Component {
       <Container>
         <Title>{this.state.deck.name}</Title>
         <CardCount>{this.state.deck.cards.length || 0} CARDS</CardCount>
-        <AddButton onPress={() => this.props.navigation.navigate('AddCard')}>
+        <AddButton onPress={() => this.props.navigation.navigate('AddCard', this.props.navigation.state.params)}>
           <AddButtonText>ADD CARD</AddButtonText>
         </AddButton>
-        <QuizButton onPress={() => this.props.navigation.navigate('Quiz')}>
+        <QuizButton onPress={() => this.props.navigation.navigate('Quiz', this.props.navigation.state.params)}>
           <QuizButtonText>START QUIZ</QuizButtonText>
         </QuizButton>
       </Container>

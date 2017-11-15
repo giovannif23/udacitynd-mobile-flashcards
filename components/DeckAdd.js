@@ -9,7 +9,7 @@ export default class DeckAdd extends Component {
     name: '',
   }
   static navigationOptions = ({ navigation }) => ({
-    title: 'Add Deck',
+    title: 'ADD DECK',
   })
   saveDeck () {
     const { name } = this.state
@@ -43,19 +43,19 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text`
-color: ${color.grey};
-font-size: 28px;
-margin-bottom: 20px;
+  color: ${color.grey};
+  font-size: 28px;
+  margin-bottom: 20px;
 `
 
 const Input = styled.TextInput`
-align-items: center;
-border: 2px solid ${color.primary};
-border-radius: 5px;
-flex-direction: row;
-justify-content: center;
-margin: 0;
-padding: 10px;
+  align-items: center;
+  border: 2px solid ${color.primary};
+  border-radius: 5px;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 10px;
 `;
 
 const SubmitButton = styled.TouchableOpacity`
