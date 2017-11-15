@@ -1,38 +1,71 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import styled from 'styled-components/native';
+import { addDeck } from '../utils/api'
 import * as color from '../utils/colors'
 
 export default class DeckAdd extends Component {
+  state = {
+    name: '',
+  }
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Add Deck',
+  })
+  saveDeck () {
+    const { name } = this.state
+    addDeck(name)
+  }
+
   render() {
     return (
       <Container>
-        <Text>What is the name of your new deck?</Text>
+        <Title>What is the name of your new deck?</Title>
 
-        <Text>Deck Title Field</Text>
+        <Input
+          onChangeText={(name) => this.setState({ name })}
+          value={this.state.name}
+          placeholder='Deck name...'
+        />
 
-        <SubmitButton>
+        <SubmitButton onPress={() => this.saveDeck()}>
           <SubmitButtonText>SUBMIT</SubmitButtonText>
         </SubmitButton>
       </Container>
     )
   }
-};
+}
 
+// Styles
 const Container = styled.View`
   background-color: ${color.white};
   flex: 1;
   padding: 20px;
 `;
 
+const Title = styled.Text`
+color: ${color.grey};
+font-size: 28px;
+margin-bottom: 20px;
+`
+
+const Input = styled.TextInput`
+align-items: center;
+border: 2px solid ${color.primary};
+border-radius: 5px;
+flex-direction: row;
+justify-content: center;
+margin: 0;
+padding: 10px;
+`;
+
 const SubmitButton = styled.TouchableOpacity`
   align-items: center;
-  background: ${color.secondary};
+  background: ${color.primary};
   border-radius: 5px;
   flex-direction: row;
   justify-content: center;
-  margin: 0;
-  padding: 10px 20px;
+  margin: 10px 0 0;
+  padding: 15px;
 `;
 
 const SubmitButtonText = styled.Text`
