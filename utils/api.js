@@ -21,8 +21,9 @@ export function getDeck(id) {
 
 export function addDeck(name) {
   const deckObj = {
-    name,
+    cards: [],
     created_at: Date.now(),
+    name,
   }
   return AsyncStorage.setItem(shortid.generate(), JSON.stringify(deckObj))
     .then(result => result)

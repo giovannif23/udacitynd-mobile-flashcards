@@ -1,14 +1,33 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native';
+import { getDeck } from '../utils/api'
 import * as color from '../utils/colors'
 
 export default class Deck extends Component {
+  state = {
+    deck: {
+      cards: [],
+    },
+  }
+  componentDidMount() {
+    getDeck(this.props.navigation.state.params)
+      .then((deck) => {
+        this.setState({
+          deck,
+        })
+      })
+  }
+  static navigationOptions = ({ navigation }) => ({
+    title: 'DECK',
+  })
+
+
   render() {
     return (
       <Container>
-        <Title>Deck View</Title>
-        <CardCount>4 CARDS</CardCount>
+        <Title>{this.state.deck.name}</Title>
+        <CardCount>{this.state.deck.cards.length || 0} CARDS</CardCount>
         <AddButton onPress={() => this.props.navigation.navigate('AddCard')}>
           <AddButtonText>ADD CARD</AddButtonText>
         </AddButton>
@@ -19,6 +38,8 @@ export default class Deck extends Component {
     )
   }
 };
+
+// Styles
 
 const Container = styled.View`
   background-color: ${color.white};

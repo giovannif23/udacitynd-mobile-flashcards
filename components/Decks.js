@@ -32,7 +32,7 @@ export default class DeckView extends Component {
       return (
         <Container>
           {this.state.decks.map(
-            (deck, index) => <DeckCard key={index} deckId={deck} onPress={() => this.props.navigation.navigate('Deck')} />
+            (deck, index) => <DeckCard key={index} deckId={deck} onPress={() => this.props.navigation.navigate('Deck', deck)} />
           )}
         </Container>
       )
