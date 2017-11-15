@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native';
+import { AppLoading } from 'expo'
 import DeckCard from './DeckCard'
 import { getDecks } from '../utils/api'
 import * as color from '../utils/colors'
@@ -21,13 +22,21 @@ export default class DeckView extends Component {
   }
 
   render() {
-    return (
-      <Container>
-        {this.state.decks.map(
-          (deck, index) => <DeckCard key={index} deckId={deck} onPress={() => this.props.navigation.navigate('Deck')} />
-        )}
-      </Container>
-    )
+    const { loaded } = this.state
+
+    if (!loaded) {
+      return <AppLoading />
+    }
+
+    if (loaded) {
+      return (
+        <Container>
+          {this.state.decks.map(
+            (deck, index) => <DeckCard key={index} deckId={deck} onPress={() => this.props.navigation.navigate('Deck')} />
+          )}
+        </Container>
+      )
+    }
   }
 };
 

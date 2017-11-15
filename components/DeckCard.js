@@ -6,7 +6,7 @@ import * as color from '../utils/colors'
 
 export default class DeckCard extends Component {
   state = {
-    title: '',
+    deck: '',
     count: '',
   }
   componentDidMount() {
@@ -24,7 +24,7 @@ export default class DeckCard extends Component {
       <Deck
         {...this.props}
         onPress={() => this.props.navigation.navigate('Deck')}>
-        <DeckTitle>{this.state.deck}</DeckTitle>
+        <DeckTitle>{this.state.deck.name}</DeckTitle>
         <DeckCardCount>20</DeckCardCount>
       </Deck>
     )

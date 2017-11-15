@@ -8,17 +8,24 @@ const FLASHCARDS = 'flashcards'
 export function getDecks() {
   return AsyncStorage.getAllKeys()
     .then(results => results)
+  
+  // clear for testing
+  // return AsyncStorage.clear()
 }
 
 export function getDeck(id) {
   console.log('API', id)
   return AsyncStorage.getItem(id)
-    .then(results => results)
+    .then(result => JSON.parse(result))
 }
 
 export function addDeck(name) {
-  return AsyncStorage.setItem(shortid.generate(), name)
-    .then((results) => console.log(results))
+  const deckObj = {
+    name,
+    created_at: Date.now(),
+  }
+  return AsyncStorage.setItem(shortid.generate(), JSON.stringify(deckObj))
+    .then(result => result)
 }
 
 
