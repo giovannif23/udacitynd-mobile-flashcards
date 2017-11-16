@@ -10,7 +10,6 @@ export default class DeckCard extends Component {
     },
   }
   componentDidMount() {
-    console.log('this.props', this.props)
     const { deck } = this.props
     this.setState({
       deck
