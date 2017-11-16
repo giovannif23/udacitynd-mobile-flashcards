@@ -1,31 +1,30 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import styled from 'styled-components/native';
-import { getDeck } from '../utils/api'
 import * as color from '../utils/colors'
 
 export default class DeckCard extends Component {
   state = {
     deck: {
-      cards: []
+      questions: []
     },
   }
   componentDidMount() {
-    const { deckId } = this.props
-    getDeck(deckId)
-      .then((deck) => {
-        this.setState({
-          deck,
-        })
-      })
+    console.log('this.props', this.props)
+    const { deck } = this.props
+    this.setState({
+      deck
+    })
   }
 
   render() {
+    const { deck } = this.state
+
     return(
       <Deck {...this.props}>
-        <DeckTitle>{this.state.deck.name}</DeckTitle>
+        <DeckTitle>{deck.title}</DeckTitle>
         <DeckCardCount>
-          {this.state.deck.cards.length || 0}
+          {deck.questions ? deck.questions.length : 0}
         </DeckCardCount>
       </Deck>
     )

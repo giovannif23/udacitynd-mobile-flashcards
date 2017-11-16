@@ -11,6 +11,7 @@ export default class Deck extends Component {
     },
   }
   componentDidMount() {
+    console.log('DECK props', this.props)
     getDeck(this.props.navigation.state.params)
       .then((deck) => {
         this.setState({
@@ -25,7 +26,7 @@ export default class Deck extends Component {
 
   render() {
     return (
-      <Container>
+      <Container {...props}>
         <Title>{this.state.deck.name}</Title>
         <CardCount>{this.state.deck.cards.length || 0} CARDS</CardCount>
         <AddButton onPress={() => this.props.navigation.navigate('AddCard', this.props.navigation.state.params)}>

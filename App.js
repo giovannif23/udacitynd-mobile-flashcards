@@ -1,4 +1,8 @@
 import React from 'react';
+import { createStore } from 'redux'
+import devToolsEnhancer from 'remote-redux-devtools';
+import { Provider } from 'react-redux'
+import reducer from './reducers'
 import { View, Text, StyleSheet, StatusBar, Platform, TouchableOpacity } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import Decks from './components/Decks'
@@ -70,10 +74,12 @@ const MainNavigator = StackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBarWrap />
-        <MainNavigator />
-      </View>
+      <Provider store={createStore(reducer, devToolsEnhancer())}>
+        <View style={styles.container}>
+          <StatusBarWrap />
+          <MainNavigator />
+        </View>
+      </Provider>
     );
   }
 }

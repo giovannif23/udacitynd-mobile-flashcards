@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import styled from 'styled-components/native';
-import { addDeck } from '../utils/api'
 import * as color from '../utils/colors'
+import { connect } from 'react-redux'
+import { addDeck } from '../actions/deckActions'
 
-export default class DeckAdd extends Component {
+class DeckAdd extends Component {
   state = {
     name: '',
   }
@@ -13,7 +14,9 @@ export default class DeckAdd extends Component {
   })
   saveDeck () {
     const { name } = this.state
-    addDeck(name)
+    this.props.dispatch(addDeck(name))
+    this.setState({ name: '' });
+    this.props.navigation.navigate('Decks')
   }
 
   render() {
@@ -34,6 +37,14 @@ export default class DeckAdd extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {}
+}
+
+export default connect(
+  mapStateToProps
+)(DeckAdd)
 
 // Styles
 const Container = styled.View`

@@ -1,44 +1,44 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native';
 import { AppLoading } from 'expo'
 import DeckCard from './DeckCard'
 import { getDecks } from '../utils/api'
 import * as color from '../utils/colors'
 
-export default class DeckView extends Component {
+class DeckView extends Component {
   state = {
     decks: [],
     loaded: false,
   }
-  componentDidMount () {
-    getDecks()
-      .then((decks) => {
-        this.setState({
-          decks,
-          loaded: true
-        })
-      })
-  }
+
+  componentDidMount () {}
 
   render() {
-    const { loaded } = this.state
+    const { decks } = this.props
 
-    if (!loaded) {
-      return <AppLoading />
-    }
-
-    if (loaded) {
-      return (
-        <Container>
-          {this.state.decks.map(
-            (deck, index) => <DeckCard key={index} deckId={deck} onPress={() => this.props.navigation.navigate('Deck', deck)} />
+    return (
+      <Container>
+        <ScrollView>
+          {Object.keys(decks).map(
+            (key) => <DeckCard key={key} deck={decks[key]} onPress={() => this.props.navigation.navigate('Deck')} />
           )}
-        </Container>
-      )
-    }
+        </ScrollView>
+      </Container>
+    )
   }
 };
+
+function mapStateToProps(state) {
+  return {
+    decks: state.decks
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(DeckView)
 
 
 // Styles
