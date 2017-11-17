@@ -43,9 +43,7 @@ function mapStateToProps(state) {
   return {}
 }
 
-export default connect(
-  mapStateToProps
-)(DeckAdd)
+export default connect(mapStateToProps)(DeckAdd)
 
 // Styles
 const Container = styled.View`

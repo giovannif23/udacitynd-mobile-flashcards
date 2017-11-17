@@ -1,33 +1,109 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Feather } from '@expo/vector-icons'
+import { connect } from 'react-redux'
+import { getDeck } from '../actions/'
 import styled from 'styled-components/native';
 import * as color from '../utils/colors'
 
-export default class Quiz extends Component {
+class Quiz extends Component {
+  state = {
+    step: 0,
+    score: 0,
+  }
+  componentDidMount() {
+  }
+  thumbsUp = () => {
+    this.setState({
+      step: this.state.step + 1,
+      score: this.state.score + 1,
+    })
+  }
+  thumbsDown = () => {
+    this.setState({
+      step: this.state.step + 1,
+      score: this.state.score,
+    })
+  }
+  reset = () => {
+    this.setState({
+      step: 0,
+      score: 0,
+    })
+  }
   render() {
+    const { score, step } = this.state
+    const { title, questions } = this.props
+
+    if (step >= questions.length) {
+      return (
+        <Confirmation>
+          {(score/questions.length > .6) && <Title>Awesome Job!</Title>}
+          {(score/questions.length < .4) && <Title>Keep Studying</Title>}
+          <SubTitle>You scored {(score / questions.length * 100)}%</SubTitle>
+        </Confirmation>
+      )
+    } 
+   
     return (
       <Container>
-        <CardPosition>1 OF 4</CardPosition>
+        <CardPosition>{step + 1} OF {questions.length}</CardPosition>
         <CardQuestion>
-          <Title>Does React Native work with Android?</Title>
+          <Title>{questions[step].question}</Title>
           <ShowAnswer>
             <ShowAnswerText>ANSWER</ShowAnswerText>
           </ShowAnswer>
 
           <Selection>
-            <FalseButton><FalseButtonText> <Feather name='thumbs-down' size={20} /></FalseButtonText></FalseButton>
-            <TrueButton><TrueButtonText><Feather name='thumbs-up' size={20} /></TrueButtonText></TrueButton>
+            
+            <FalseButton onPress={() => this.thumbsDown()}>
+              <FalseButtonText>
+                <Feather name='thumbs-down' size={20} />
+              </FalseButtonText>
+            </FalseButton>
+
+            <TrueButton onPress={() => this.thumbsUp()}>
+              <TrueButtonText>
+                <Feather name='thumbs-up' size={20} />
+              </TrueButtonText>
+            </TrueButton>
+
           </Selection>
+
         </CardQuestion>
       </Container>
     )
+
   }
 };    
+
+function mapStateToProps(state, {navigation}) {
+  const { 
+    title, 
+    questions 
+  } = navigation.state.params;
+  return {
+    title, 
+    questions 
+  }
+}
+
+export default connect(mapStateToProps)(Quiz)
+
+
+// Styles
 
 const Container = styled.View`
   background-color: ${color.white};
   flex: 1;
+  padding: 20px;
+`;
+
+const Confirmation = styled.View`
+  align-items: center;
+  background-color: ${color.white};
+  flex: 1;
+  justify-content: center;
   padding: 20px;
 `;
 
@@ -48,6 +124,11 @@ const CardQuestion = styled.View`
 const Title = styled.Text`
   color: ${color.grey};
   font-size: 32px;
+`
+
+const SubTitle = styled.Text`
+  color: ${color.grey};
+  font-size: 18px;
 `
 
 const ShowAnswer = styled.TouchableOpacity`

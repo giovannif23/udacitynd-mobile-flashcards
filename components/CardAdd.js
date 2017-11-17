@@ -62,8 +62,6 @@ class CardAdd extends Component {
   }
 };    
 
-// State
-
 function mapStateToProps(decks) {
   return {
     decks
