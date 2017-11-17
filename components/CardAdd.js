@@ -8,21 +8,35 @@ import * as color from '../utils/colors'
 class CardAdd extends Component {
   state = {
     answer: null,
+    title: null,
     question: null,
+    questions: [],
   }
   componentDidMount() {
-    const deck = this.props.navigation.state.params;
+    const { navigation } = this.props
+    const deck = navigation.state.params;
     this.setState({
-      deck
+      title: deck.title,
+      questions: deck.questions,
     })
   }
   saveCard() {
-    const { answer, deck, question } = this.state
-    this.props.dispatch(addCardToDeck(deck.id, {answer, question}))
+    const { answer, title, question } = this.state
+    const { dispatch } = this.props
+    const questionObj = {
+      answer,
+      question
+    }
+    dispatch(addCardToDeck(title, questionObj))
+    this.setState({ 
+      answer: null,
+      questions: null
+    });
+    this.props.navigation.navigate('Decks')
   }
 
   render() {
-    const { deck } = this.state
+    const { title } = this.state
 
     return (
       <Container>
@@ -50,15 +64,13 @@ class CardAdd extends Component {
 
 // State
 
-function mapStateToProps(state) {
+function mapStateToProps(decks) {
   return {
-    decks: state.decks
+    decks
   }
 }
 
-export default connect(
-  mapStateToProps
-)(CardAdd)
+export default connect(mapStateToProps)(CardAdd)
 
 
 // Styles

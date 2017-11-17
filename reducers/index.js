@@ -7,36 +7,29 @@ import {
 function decks (state = {}, action) {
   let currentDeckIndex
   switch (action.type) {
-    case ADD_DECK :
-      return {
-        ...state,
-        [action.deck]: { title: action.deck, questions: [] }
-      }
-    
-    case GET_DECKS :
+
+    case GET_DECKS:
       return {
         ...state,
         ...action.decks
       }
 
-    case ADD_CARD_TO_DECK :
-      for (let key in state.decks) {
-        if (state.decks[key].id === action.id) {
-          currentDeckIndex = key;
-        }
-      }
-
+    case ADD_DECK :
       return {
         ...state,
-        decks: {
-          ...state.decks,
-          [currentDeckIndex]: {
-            ...state.decks[currentDeckIndex],
-            questions: [
-              ...state.decks[currentDeckIndex].questions,
-              ...action.payload
-            ]
-          }
+        [action.deck]: { title: action.deck, questions: [] }
+      }
+
+    case ADD_CARD_TO_DECK :
+      console.log('ADD_CARD_TO_DECK', action)
+      return {
+        ...state,
+        [action.deck]: {
+          ...state[action.deck],
+          questions: [
+            ...state[action.deck].questions,
+            action.question
+          ]
         }
       }
 

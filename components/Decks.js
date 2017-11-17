@@ -18,13 +18,13 @@ class DeckView extends Component {
   }
 
   render() {
-    let { decks } = this.props
+    let { decks, navigation } = this.props
 
     return (
       <Container>
         <ScrollView>
           {Object.keys(decks).map(
-            (key) => <DeckCard key={key} deck={decks[key]} onPress={() => this.props.navigation.navigate('Deck', decks[key])} />
+            (key) => <DeckCard key={key} deck={decks[key]} onPress={() => navigation.navigate('Deck', decks[key])} />
           )}
         </ScrollView>
       </Container>

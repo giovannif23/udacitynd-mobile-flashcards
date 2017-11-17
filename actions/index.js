@@ -27,24 +27,18 @@ export function addDeck(deck) {
   }
 }
 
-export function addCardToDeck (id, { answer, question }) {
+export function addCardToDeck (title, question) {
+  console.log('API title', title)
+  console.log('API question', question)
+
   return (dispatch) => {
-    api.addCardToDeck(deck)
+    api.addCardToDeck(title, question)
       .then(() => {
         dispatch({
           type: ADD_CARD_TO_DECK,
-          deck: id,
-          question
+          deck: title,
+          question,
         })
       })
   }
 }
-
-// export function addCard(deckId, card) {
-//   addCardToDeck(deckId, card)
-//   return {
-//     type: ADD_CARD,
-//     deck: deckId,
-//     card: card,
-//   }
-// }
