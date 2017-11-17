@@ -16,7 +16,7 @@ function decks (state = {}, action) {
     case GET_DECKS :
       return {
         ...state,
-        [action.deck.title]: action.decks
+        ...action.decks
       }
 
     case ADD_CARD_TO_DECK :

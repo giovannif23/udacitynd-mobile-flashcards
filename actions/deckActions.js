@@ -5,30 +5,29 @@ import {
   ADD_CARD_TO_DECK,
 } from './index';
 
+export function getDecks () {
+  return (dispatch) => {
+    api.getDecks()
+      .then((response) => {
+        dispatch({
+          type: GET_DECKS,
+          decks: response
+        })
+      })
+    }
+}
+
 export function addDeck (deck) {
   return (dispatch) => {
     api.addDeck (deck)
-      .then( () => {
+      .then(() => {
         dispatch({
           type: ADD_DECK,
           deck
         })
       })
-  }
+    }
 }
-
-// export function getDecks () {
-//   return (dispatch) => {
-//     api.getDecks()
-//       .then((response) => {
-//         console.log('response', response)
-//         dispatch({
-//           type: GET_DECKS,
-//           decks: response
-//         })
-//       })
-//   }
-// }
 
 export function addCardToDeck (id, { answer, question }) {
   return {

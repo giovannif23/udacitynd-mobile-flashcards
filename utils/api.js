@@ -2,6 +2,20 @@ import { AsyncStorage } from 'react-native'
 
 export const DECK_STORAGE_KEY = 'FlashCards:cards'
 
+
+/**
+ * @description Gets all Decks
+ */
+export function getDecks () {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
+    .then((reponse) => {
+      return JSON.parse(reponse)
+    })
+
+  // clear for testing
+  // return AsyncStorage.clear()
+}
+
 /**
  * @description Adds a new Deck
  */
@@ -15,16 +29,6 @@ export function addDeck (title) {
   return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(deckObj))
 }
 
-/**
- * @description Gets all Decks
- */
-export function getDecks () {
-  return AsyncStorage.getItem(DECK_STORAGE_KEY)
-    .then((reponse) => JSON.parse(reponse))
-  
-  // clear for testing
-  // return AsyncStorage.clear()
-}
 
 export function getDeck(id) {
   return AsyncStorage.getItem(id)

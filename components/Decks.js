@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import styled from 'styled-components/native';
 import { AppLoading } from 'expo'
 import DeckCard from './DeckCard'
-import * as api from '../actions/deckActions'
+import { getDecks } from '../actions/deckActions'
 import * as color from '../utils/colors'
 
 class DeckView extends Component {
@@ -13,7 +13,8 @@ class DeckView extends Component {
   }
 
   componentDidMount () {
-    
+    const { dispatch } = this.props  
+    dispatch(getDecks())
   }
 
   render() {
