@@ -21,7 +21,6 @@ function decks (state = {}, action) {
       }
 
     case ADD_CARD_TO_DECK :
-      console.log('ADD_CARD_TO_DECK', action)
       return {
         ...state,
         [action.deck]: {

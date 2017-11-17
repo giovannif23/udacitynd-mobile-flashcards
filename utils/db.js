@@ -1,6 +1,5 @@
-export default [
-  {
-    id: '1',
+export function dbInit() {
+  React: {
     title: 'React',
     questions: [
       {
@@ -13,8 +12,7 @@ export default [
       }
     ]
   },
-  {
-    id: '2',
+  JavaScript: {
     title: 'JavaScript',
     questions: [
       {
@@ -23,4 +21,4 @@ export default [
       }
     ]
   }
-]
+}
