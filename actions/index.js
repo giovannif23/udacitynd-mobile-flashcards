@@ -27,7 +27,7 @@ export function addDeck(deck) {
   }
 }
 
-export function addCardToDeck (title, question) {
+export function addCardToDeck(title, question) {
   return (dispatch) => {
     api.addCardToDeck(title, question)
       .then(() => {
