@@ -1,21 +1,16 @@
-import shortid from 'shortid'
 import { 
   ADD_DECK,
   ADD_CARD_TO_DECK,
 } from '../actions'
 
-const INITIAL_STATE = {
-  decks: {},
-  active: {},
-}
-
-function decks (state = INITIAL_STATE, action) {
+function decks (state = {}, action) {
   let currentDeckIndex
   switch (action.type) {
     case ADD_DECK :
+      console.log('ADD_DECK', action)
       return {
         ...state,
-        decks: [...state.decks, action.deck]
+        [action.deck.title]: action.deck
       }
     case ADD_CARD_TO_DECK :
       for (let key in state.decks) {

@@ -1,4 +1,4 @@
-import shortid from 'shortid'
+import * as api from '../utils/api'
 import {
   ADD_DECK,
   GET_DECKS,
@@ -7,14 +7,26 @@ import {
 
 export function addDeck (deck) {
   const newObj = {
-    created_at: Date.now(),
-    id: shortid.generate(),
-    title: deck
+    title: deck,
+    quetsions: []
   }
-  return {
-    type: ADD_DECK,
-    deck: newObj,
+
+  return (dispatch) => {
+    api.addDeck(deck).then((result) => {
+      console.log('response', result)
+      dispatch({
+        type: ADD_DECK,
+        deck: newObj
+      })
+    })
   }
+
+
+  // redux
+  // return {
+  //   type: ADD_DECK,
+  //   deck: newObj,
+  // }
 }
 
 export function addCardToDeck (id, { answer, question }) {

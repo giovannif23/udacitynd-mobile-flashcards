@@ -1,9 +1,22 @@
 import { AsyncStorage } from 'react-native'
-import shortid from 'shortid'
-import db from './db'
 
 const DECKS = 'decks'
-const FLASHCARDS = 'flashcards'
+
+
+/**
+ * @description Adds a new Deck
+ */
+export function addDeck (title) {
+  const deckObj = {
+    [title]: {
+      title,
+      questions: []
+    }
+  }
+  return AsyncStorage.setItem(title, JSON.stringify(deckObj));
+  })
+}
+
 
 export function getDecks() {
   return AsyncStorage.getAllKeys()
@@ -18,16 +31,16 @@ export function getDeck(id) {
     .then(result => JSON.parse(result))
 }
 
-export function addDeck(name) {
-  const deckObj = {
-    cards: [],
-    created_at: Date.now(),
-    name,
-    updated_at: Date.now(),
-  }
-  return AsyncStorage.setItem(shortid.generate(), JSON.stringify(deckObj))
-    .then(result => result)
-}
+// export function addDeck(name) {
+//   const deckObj = {
+//     cards: [],
+//     created_at: Date.now(),
+//     name,
+//     updated_at: Date.now(),
+//   }
+//   return AsyncStorage.setItem(shortid.generate(), JSON.stringify(deckObj))
+//     .then(result => result)
+// }
 
 export function addCardToDeck(id, { answer, question}) {
   const questionObj = {
