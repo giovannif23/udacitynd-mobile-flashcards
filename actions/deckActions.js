@@ -12,21 +12,27 @@ export function addDeck (deck) {
   }
 
   return (dispatch) => {
-    api.addDeck(deck).then((result) => {
-      console.log('response', result)
-      dispatch({
-        type: ADD_DECK,
-        deck: newObj
+    api.addDeck (deck)
+      .then( () => {
+        dispatch({
+          type: ADD_DECK,
+          deck: newObj
+        })
       })
-    })
   }
+}
 
-
-  // redux
-  // return {
-  //   type: ADD_DECK,
-  //   deck: newObj,
-  // }
+export function getDecks () {
+  return (dispatch) => {
+    api.getDecks()
+      .then((response) => {
+        console.log('response', response)
+        dispatch({
+          type: GET_DECKS,
+          decks: response
+        })
+      })
+  }
 }
 
 export function addCardToDeck (id, { answer, question }) {

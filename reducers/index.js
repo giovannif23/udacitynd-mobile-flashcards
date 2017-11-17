@@ -1,5 +1,6 @@
 import { 
   ADD_DECK,
+  GET_DECKS,
   ADD_CARD_TO_DECK,
 } from '../actions'
 
@@ -7,11 +8,17 @@ function decks (state = {}, action) {
   let currentDeckIndex
   switch (action.type) {
     case ADD_DECK :
-      console.log('ADD_DECK', action)
       return {
         ...state,
         [action.deck.title]: action.deck
       }
+    
+    case GET_DECKS :
+      return {
+        ...state,
+        [action.deck.title]: action.decks
+      }
+
     case ADD_CARD_TO_DECK :
       for (let key in state.decks) {
         if (state.decks[key].id === action.id) {

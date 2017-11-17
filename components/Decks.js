@@ -4,19 +4,21 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import styled from 'styled-components/native';
 import { AppLoading } from 'expo'
 import DeckCard from './DeckCard'
-import { getDecks } from '../utils/api'
+import * as api from '../actions/deckActions'
 import * as color from '../utils/colors'
 
 class DeckView extends Component {
   state = {
-    decks: [],
     loaded: false,
   }
 
-  componentDidMount () {}
+  componentDidMount () {
+    this.props.dispatch(api.getDecks())
+  }
 
   render() {
-    const { decks } = this.props
+    let { decks } = this.props
+    console.log('render decks', decks)
 
     return (
       <Container>
@@ -31,8 +33,9 @@ class DeckView extends Component {
 };
 
 function mapStateToProps(state) {
+  console.log('mapStateToProps', state)
   return {
-    decks: state.decks
+    state
   }
 }
 
