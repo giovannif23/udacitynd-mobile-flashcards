@@ -41,6 +41,11 @@ class Quiz extends Component {
           {(score/questions.length > .6) && <Title>Awesome Job!</Title>}
           {(score/questions.length < .4) && <Title>Keep Studying</Title>}
           <SubTitle>You scored {(score / questions.length * 100)}%</SubTitle>
+          <TrueButton onPress={() => this.reset()}>
+            <TrueButtonText>
+              <Feather name='refresh-ccw' size={20} />
+            </TrueButtonText>
+          </TrueButton>
         </Confirmation>
       )
     } 
@@ -129,6 +134,7 @@ const Title = styled.Text`
 const SubTitle = styled.Text`
   color: ${color.grey};
   font-size: 18px;
+  margin-bottom: 20px;
 `
 
 const ShowAnswer = styled.TouchableOpacity`
