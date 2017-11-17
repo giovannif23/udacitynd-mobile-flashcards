@@ -13,35 +13,31 @@ class DeckView extends Component {
   }
 
   componentDidMount () {
-    this.props.dispatch(api.getDecks())
+    
   }
 
   render() {
     let { decks } = this.props
-    console.log('render decks', decks)
 
     return (
       <Container>
         <ScrollView>
-          {/* {Object.keys(decks).map(
+          {Object.keys(decks).map(
             (key) => <DeckCard key={key} deck={decks[key]} onPress={() => this.props.navigation.navigate('Deck', decks[key])} />
-          )} */}
+          )}
         </ScrollView>
       </Container>
     )
   }
 };
 
-function mapStateToProps(state) {
-  console.log('mapStateToProps', state)
+function mapStateToProps(decks) {
   return {
-    state
+    decks
   }
 }
 
-export default connect(
-  mapStateToProps
-)(DeckView)
+export default connect(mapStateToProps)(DeckView)
 
 
 // Styles

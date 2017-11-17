@@ -12,7 +12,7 @@ export function addDeck (title) {
       questions: [],
     }
   }
-  return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(deckObj))
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(deckObj))
 }
 
 /**

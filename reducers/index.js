@@ -10,7 +10,7 @@ function decks (state = {}, action) {
     case ADD_DECK :
       return {
         ...state,
-        [action.deck.title]: action.deck
+        [action.deck]: { title: action.deck, questions: [] }
       }
     
     case GET_DECKS :

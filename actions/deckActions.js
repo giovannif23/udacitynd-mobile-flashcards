@@ -6,34 +6,29 @@ import {
 } from './index';
 
 export function addDeck (deck) {
-  const newObj = {
-    title: deck,
-    quetsions: []
-  }
-
   return (dispatch) => {
     api.addDeck (deck)
       .then( () => {
         dispatch({
           type: ADD_DECK,
-          deck: newObj
+          deck
         })
       })
   }
 }
 
-export function getDecks () {
-  return (dispatch) => {
-    api.getDecks()
-      .then((response) => {
-        console.log('response', response)
-        dispatch({
-          type: GET_DECKS,
-          decks: response
-        })
-      })
-  }
-}
+// export function getDecks () {
+//   return (dispatch) => {
+//     api.getDecks()
+//       .then((response) => {
+//         console.log('response', response)
+//         dispatch({
+//           type: GET_DECKS,
+//           decks: response
+//         })
+//       })
+//   }
+// }
 
 export function addCardToDeck (id, { answer, question }) {
   return {
