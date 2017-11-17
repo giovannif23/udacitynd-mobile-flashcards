@@ -1,21 +1,30 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import styled from 'styled-components/native';
-import { addCardToDeck } from '../utils/api'
+import { connect } from 'react-redux'
+import { addCardToDeck } from '../actions/deckActions'
 import * as color from '../utils/colors'
 
-export default class CardAdd extends Component {
+class CardAdd extends Component {
   state = {
     answer: '',
+    deck: {},
     question: '',
   }
+  componentDidMount() {
+    const deck = this.props.navigation.state.params;
+    this.setState({
+      deck
+    })
+  }
   saveCard() {
-    const { answer, question } = this.state
-    const deckId = this.props.navigation.state.params;
-    addCardToDeck(deckId, {answer, question})
+    const { answer, deck, question } = this.state
+    this.props.dispatch(addCardToDeck(deck.id, {answer, question}))
   }
 
   render() {
+    const { deck } = this.state
+
     return (
       <Container>
         <Title>Add Card</Title>
@@ -39,6 +48,18 @@ export default class CardAdd extends Component {
     )
   }
 };    
+
+// State
+
+function mapStateToProps(state) {
+  return {
+    decks: state.decks
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(CardAdd)
 
 
 // Styles

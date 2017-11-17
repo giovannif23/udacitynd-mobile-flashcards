@@ -6,14 +6,12 @@ import * as color from '../utils/colors'
 export default class Deck extends Component {
   state = {
     deck: {
-      questions: [],
+      cards: [],
     },
   }
   componentDidMount() {
     const deck = this.props.navigation.state.params;
-    this.setState({
-      deck: deck
-    })
+    this.setState({ deck })
   }
   static navigationOptions = ({ navigation }) => ({
     title: 'DECK',
@@ -22,16 +20,15 @@ export default class Deck extends Component {
 
   render() {
     const { deck } = this.state
-    console.log('this.state', this.state)
 
     return (
-      <Container {...this.props}>
+      <Container>
         <Title>{deck.title}</Title>
         <CardCount>{deck.questions ? deck.questions.length : 0} CARDS</CardCount>
-        <AddButton onPress={() => this.props.navigation.navigate('AddCard', this.props.navigation.state.params)}>
+        <AddButton onPress={() => this.props.navigation.navigate('AddCard', deck)}>
           <AddButtonText>ADD CARD</AddButtonText>
         </AddButton>
-        <QuizButton onPress={() => this.props.navigation.navigate('Quiz', this.props.navigation.state.params)}>
+        <QuizButton onPress={() => this.props.navigation.navigate('Quiz', deck)}>
           <QuizButtonText>START QUIZ</QuizButtonText>
         </QuizButton>
       </Container>
