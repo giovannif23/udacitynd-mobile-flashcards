@@ -5,25 +5,25 @@ import * as color from '../utils/colors'
 
 export default class DeckCard extends Component {
   state = {
-    deck: {
-      questions: []
-    },
+    title: null,
+    questions: [],
   }
   componentDidMount() {
     const { deck } = this.props
-    this.setState({
-      deck
-    })
+    this.setState({ 
+      title: deck.title,
+      questions: deck.questions,
+     })
   }
 
   render() {
-    const { deck } = this.state
+    const { title, questions } = this.state
 
     return(
       <Deck {...this.props}>
-        <DeckTitle>{deck.title}</DeckTitle>
+        <DeckTitle>{title}</DeckTitle>
         <DeckCardCount>
-          {deck.questions ? deck.questions.length : 0}
+          {questions.length}
         </DeckCardCount>
       </Deck>
     )

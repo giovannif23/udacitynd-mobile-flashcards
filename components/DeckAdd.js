@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-nativ
 import styled from 'styled-components/native';
 import * as color from '../utils/colors'
 import { connect } from 'react-redux'
-import { addDeck } from '../actions/deckActions'
+import { addDeck } from '../actions/'
 
 class DeckAdd extends Component {
   state = {
@@ -14,7 +14,8 @@ class DeckAdd extends Component {
   })
   saveDeck () {
     const { name } = this.state
-    this.props.dispatch(addDeck(name))
+    const { dispatch } = this.props
+    dispatch(addDeck(name))
     this.setState({ name: '' });
     this.props.navigation.navigate('Decks')
   }

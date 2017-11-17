@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import styled from 'styled-components/native';
 import { connect } from 'react-redux'
-import { addCardToDeck } from '../actions/deckActions'
+import { addCardToDeck } from '../actions/'
 import * as color from '../utils/colors'
 
 class CardAdd extends Component {
   state = {
-    answer: '',
-    deck: {},
-    question: '',
+    answer: null,
+    question: null,
   }
   componentDidMount() {
     const deck = this.props.navigation.state.params;

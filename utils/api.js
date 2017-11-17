@@ -7,7 +7,7 @@ export const DECK_STORAGE_KEY = 'FlashCards:cards'
  * @description Gets all Decks
  */
 export function getDecks () {
-  return AsyncStorage.getItem(DECK_STORAGE_KEY)
+  return AsyncStorage.getItem (DECK_STORAGE_KEY)
     .then((reponse) => {
       return JSON.parse(reponse)
     })
@@ -26,37 +26,36 @@ export function addDeck (title) {
       questions: [],
     }
   }
-  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(deckObj))
+  return AsyncStorage.mergeItem (DECK_STORAGE_KEY, JSON.stringify(deckObj))
 }
 
-
-export function getDeck(id) {
-  return AsyncStorage.getItem(id)
-    .then(result => JSON.parse(result))
-}
-
-// export function addDeck(name) {
-//   const deckObj = {
-//     cards: [],
-//     created_at: Date.now(),
-//     name,
-//     updated_at: Date.now(),
-//   }
-//   return AsyncStorage.setItem(shortid.generate(), JSON.stringify(deckObj))
-//     .then(result => result)
-// }
-
-export function addCardToDeck(id, { answer, question}) {
+/**
+ * @description Adds card to a Deck
+ */
+export function addCardToDeck (title, { answer, question}) {
   const questionObj = {
     answer,
     question,
   }
 
-  getDeck(id)
-    .then((result) => {
-      result.updated_at = Date.now()
-      result.cards.push(questionObj);
-      return AsyncStorage.mergeItem(id, JSON.stringify(result))
-        .then(result => result)
+  AsyncStorage.getItem (DECK_STORAGE_KEY)
+    .then((response) => {
+      const resp = JSON.parse(result)
+      const newArr = [
+        ...resp[title].questions, 
+        questionObj
+      ]
+      return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+        [title]: {
+          questions: newArr
+        }
+      }))
     })
+
+  // getDeck(id)
+  //   .then((result) => {
+  //     return AsyncStorage.mergeItem(id, JSON.stringify(result))
+  //       .then(result => result)
+  //   })
 }
+

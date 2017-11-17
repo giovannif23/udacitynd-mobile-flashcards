@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import styled from 'styled-components/native';
 import { AppLoading } from 'expo'
 import DeckCard from './DeckCard'
-import { getDecks } from '../actions/deckActions'
+import { getDecks } from '../actions/'
 import * as color from '../utils/colors'
 
 class DeckView extends Component {
