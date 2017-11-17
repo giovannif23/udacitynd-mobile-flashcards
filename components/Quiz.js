@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { 
+  Animated, 
+  View, 
+  Text, 
+  StyleSheet, 
+  TouchableOpacity 
+} from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions/'
-import styled from 'styled-components/native';
+import styled from 'styled-components/native'
 import * as color from '../utils/colors'
 
 class Quiz extends Component {
   state = {
     step: 0,
     score: 0,
+    isFlipped: false,
+    opacityValue: new Animated.Value(0)
   }
   componentDidMount() {
   }
@@ -31,8 +39,14 @@ class Quiz extends Component {
       score: 0,
     })
   }
+  flipCard = () => {
+    this.setState({
+      isFlipped: !this.state.isFlipped
+    });
+  }
+
   render() {
-    const { score, step } = this.state
+    const { isFlipped, score, step } = this.state
     const { title, questions } = this.props
 
     if (step >= questions.length) {
@@ -54,8 +68,9 @@ class Quiz extends Component {
       <Container>
         <CardPosition>{step + 1} OF {questions.length}</CardPosition>
         <CardQuestion>
-          <Title>{questions[step].question}</Title>
-          <ShowAnswer>
+          {!isFlipped && <Title>{questions[step].question}</Title>}
+          {isFlipped && <Title>{questions[step].answer}</Title>}
+          <ShowAnswer onPress={() => { this.flipCard() }}>
             <ShowAnswerText>ANSWER</ShowAnswerText>
           </ShowAnswer>
 
