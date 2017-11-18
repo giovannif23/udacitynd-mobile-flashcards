@@ -36,6 +36,8 @@ export default class App extends React.Component {
   }
 }
 
+// Styles
+
 const Container = styled.View`
   background-color: ${color.white};
   flex: 1;

@@ -4,20 +4,8 @@ import styled from 'styled-components/native';
 import * as color from '../utils/colors'
 
 export default class DeckCard extends Component {
-  state = {
-    title: null,
-    questions: [],
-  }
-  componentDidMount() {
-    const { deck } = this.props
-    this.setState({ 
-      title: deck.title,
-      questions: deck.questions,
-     })
-  }
-
   render() {
-    const { title, questions } = this.state
+    const { title, questions } = this.props.deck
 
     return(
       <Deck {...this.props}>
