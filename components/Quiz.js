@@ -10,6 +10,7 @@ import { Feather } from '@expo/vector-icons'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions/'
 import styled from 'styled-components/native'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 import * as color from '../utils/colors'
 
 class Quiz extends Component {
@@ -19,13 +20,15 @@ class Quiz extends Component {
     isFlipped: false,
     opacityValue: new Animated.Value(0)
   }
-  componentDidMount() {
-  }
   thumbsUp = () => {
     this.setState({
       step: this.state.step + 1,
       score: this.state.score + 1,
     })
+    if (this.state.step >= this.props.questions.length) {
+      clearLocalNotification()
+        .then(setLocalNotification)
+    }
   }
   thumbsDown = () => {
     this.setState({

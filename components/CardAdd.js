@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-nativ
 import styled from 'styled-components/native';
 import { connect } from 'react-redux'
 import { addCardToDeck } from '../actions/'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 import * as color from '../utils/colors'
 
 class CardAdd extends Component {
@@ -32,6 +33,8 @@ class CardAdd extends Component {
       answer: null,
       questions: null
     });
+    clearLocalNotification()
+      .then(setLocalNotification)
     this.props.navigation.navigate('Decks')
   }
 
