@@ -62,11 +62,7 @@ class CardAdd extends Component {
   }
 };    
 
-function mapStateToProps(decks) {
-  return {
-    decks
-  }
-}
+const mapStateToProps = ({ decks }) => ({ decks })
 
 export default connect(mapStateToProps)(CardAdd)
 

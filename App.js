@@ -5,9 +5,9 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import reducer from './reducers'
 import { MainNavigator } from './components/Navigator'
+import TopBar from './components/TopBar'
 import * as color from './utils/colors'
 import styled from 'styled-components/native'
-import { Constants } from 'expo'
 import { 
   View, 
   Text,
@@ -16,15 +16,6 @@ import {
   Platform, 
   TouchableOpacity 
 } from 'react-native'
-
-
-function TopBar ({ backgroundColor, ...props }) {
-  return (
-    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-    </View>
-  )
-}
 
 const store = createStore(
   reducer, 

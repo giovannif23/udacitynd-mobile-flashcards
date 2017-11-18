@@ -4,6 +4,9 @@ import styled from 'styled-components/native';
 import * as color from '../utils/colors'
 
 export default class Deck extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: 'DECK',
+  })
   state = {
     deck: {
       cards: [],
@@ -13,10 +16,6 @@ export default class Deck extends Component {
     const deck = this.props.navigation.state.params;
     this.setState({ deck })
   }
-  static navigationOptions = ({ navigation }) => ({
-    title: 'DECK',
-  })
-
 
   render() {
     const { deck } = this.state

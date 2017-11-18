@@ -39,11 +39,7 @@ class DeckAdd extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {}
-}
-
-export default connect(mapStateToProps)(DeckAdd)
+export default connect()(DeckAdd)
 
 // Styles
 const Container = styled.View`
