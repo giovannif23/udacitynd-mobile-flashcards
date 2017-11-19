@@ -19,7 +19,7 @@ class DeckView extends Component {
   }
 
   render() {
-    let { decks, navigation } = this.props
+    const { decks, navigation } = this.props
 
     if (!Object.keys(decks).length) {
       return (

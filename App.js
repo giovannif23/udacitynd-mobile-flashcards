@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStore, applyMiddleware } from 'redux'
-import devToolsEnhancer from 'remote-redux-devtools'
+import { composeWithDevTools } from 'remote-redux-devtools';
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import reducer from './reducers'
@@ -20,8 +20,9 @@ import {
 
 const store = createStore(
   reducer, 
-  devToolsEnhancer(),
-  applyMiddleware(thunk)
+  composeWithDevTools(
+    applyMiddleware(thunk)
+  )
 );
 
 export default class App extends React.Component {

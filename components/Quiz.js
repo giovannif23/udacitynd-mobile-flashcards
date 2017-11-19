@@ -18,7 +18,6 @@ class Quiz extends Component {
     step: 0,
     score: 0,
     isFlipped: false,
-    opacityValue: new Animated.Value(0)
   }
   thumbsUp = () => {
     this.setState({
@@ -55,7 +54,7 @@ class Quiz extends Component {
     if (step >= questions.length) {
       return (
         <Confirmation>
-          {(score/questions.length > .6) && <Title>Awesome Job!</Title>}
+          {(score/questions.length >= .6) && <Title>Awesome Job!</Title>}
           {(score/questions.length < .4) && <Title>Keep Studying</Title>}
           <SubTitle>You scored {(score / questions.length * 100)}%</SubTitle>
           <TrueButton onPress={() => this.reset()}>
@@ -74,7 +73,7 @@ class Quiz extends Component {
           {!isFlipped && <Title>{questions[step].question}</Title>}
           {isFlipped && <Title>{questions[step].answer}</Title>}
           <ShowAnswer onPress={() => { this.flipCard() }}>
-            <ShowAnswerText>ANSWER</ShowAnswerText>
+            <ShowAnswerText>{isFlipped ? 'SHOW QUESTION' : 'SHOW ANSWER'}</ShowAnswerText>
           </ShowAnswer>
 
           <Selection>
@@ -163,7 +162,8 @@ const ShowAnswer = styled.TouchableOpacity`
   justify-content: center;
   margin: 15px 0 0;
   padding: 5px 7px;
-  width: 65px;
+  text-align: center;
+  width: auto;
 `;
 
 const ShowAnswerText = styled.Text`

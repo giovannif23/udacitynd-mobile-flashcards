@@ -23,7 +23,7 @@ class CardAdd extends Component {
   }
   saveCard() {
     const { answer, title, question } = this.state
-    const { dispatch } = this.props
+    const { dispatch, navigation } = this.props
     const questionObj = {
       answer,
       question
@@ -35,7 +35,7 @@ class CardAdd extends Component {
     });
     clearLocalNotification()
       .then(setLocalNotification)
-    this.props.navigation.navigate('Decks')
+    navigation.goBack()
   }
 
   render() {
@@ -65,7 +65,7 @@ class CardAdd extends Component {
   }
 };    
 
-const mapStateToProps = ({ decks }) => ({ decks })
+const mapStateToProps = ({state}) => ({state})
 
 export default connect(mapStateToProps)(CardAdd)
 
