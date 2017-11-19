@@ -1,39 +1,44 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native';
 import * as color from '../utils/colors'
 
-export default class Deck extends Component {
+class Deck extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'DECK',
   })
-  state = {
-    deck: {
-      cards: [],
-    },
-  }
   componentDidMount() {
     const deck = this.props.navigation.state.params;
     this.setState({ deck })
   }
 
   render() {
-    const { deck } = this.state
+    const { title } = this.props.navigation.state.params;
+    const deck = this.props.state[title];
 
     return (
       <Container>
-        <Title>{deck.title}</Title>
-        <CardCount>{deck.questions ? deck.questions.length : 0} CARDS</CardCount>
-        <AddButton onPress={() => this.props.navigation.navigate('AddCard', deck)}>
-          <AddButtonText>ADD CARD</AddButtonText>
-        </AddButton>
-        <QuizButton onPress={() => this.props.navigation.navigate('Quiz', deck)}>
-          <QuizButtonText>START QUIZ</QuizButtonText>
-        </QuizButton>
+        {deck &&
+          <View>
+            <Title>{deck.title}</Title>
+            <CardCount>{deck.questions ? deck.questions.length : 0} CARDS</CardCount>
+            <AddButton onPress={() => this.props.navigation.navigate('AddCard', deck)}>
+              <AddButtonText>ADD CARD</AddButtonText>
+            </AddButton>
+            <QuizButton onPress={() => this.props.navigation.navigate('Quiz', deck)}>
+              <QuizButtonText>START QUIZ</QuizButtonText>
+            </QuizButton>
+          </View>
+        }
       </Container>
     )
   }
 };
+
+const mapStateToProps = (state) => ({ state })
+
+export default connect(mapStateToProps)(Deck)
 
 // Styles
 

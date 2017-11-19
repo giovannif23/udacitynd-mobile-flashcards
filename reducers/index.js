@@ -21,7 +21,7 @@ function decks (state = {}, action) {
       }
 
     case ADD_CARD_TO_DECK :
-      return {
+      const returnObj = {
         ...state,
         [action.deck]: {
           ...state[action.deck],
@@ -31,6 +31,8 @@ function decks (state = {}, action) {
           ]
         }
       }
+      console.log('REDUCER returnObj', returnObj)
+      return returnObj
 
     default :
       return state

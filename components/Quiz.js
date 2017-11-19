@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { 
-  Animated, 
   View, 
   Text, 
   StyleSheet, 
@@ -55,7 +54,7 @@ class Quiz extends Component {
       return (
         <Confirmation>
           {(score/questions.length >= .6) && <Title>Awesome Job!</Title>}
-          {(score/questions.length < .4) && <Title>Keep Studying</Title>}
+          {(score/questions.length < .6) && <Title>Keep Studying</Title>}
           <SubTitle>You scored {(score / questions.length * 100)}%</SubTitle>
           <TrueButton onPress={() => this.reset()}>
             <TrueButtonText>
@@ -127,6 +126,7 @@ const Confirmation = styled.View`
   flex: 1;
   justify-content: center;
   padding: 20px;
+  text-align: center;
 `;
 
 const CardPosition = styled.Text`
@@ -141,17 +141,20 @@ const CardQuestion = styled.View`
   align-items: center;
   flex: 1;
   padding: 20px;
+  text-align: center;
 `;
 
 const Title = styled.Text`
   color: ${color.grey};
   font-size: 32px;
+  text-align: center;
 `
 
 const SubTitle = styled.Text`
   color: ${color.grey};
   font-size: 18px;
   margin-bottom: 20px;
+  text-align: center;
 `
 
 const ShowAnswer = styled.TouchableOpacity`
