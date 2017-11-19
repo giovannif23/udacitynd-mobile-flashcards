@@ -17,7 +17,7 @@ class DeckAdd extends Component {
     const { dispatch } = this.props
     dispatch(addDeck(name))
     this.setState({ name: '' });
-    this.props.navigation.navigate('Decks')
+    this.props.navigation.navigate('Deck', {title: name, questions: []})
   }
 
   render() {
